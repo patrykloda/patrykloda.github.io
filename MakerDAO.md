@@ -15,27 +15,27 @@ As mentioned before, the whole protocol is centered around locking up collateral
 To mint new Dai, a user can interact with the MakerDAO CDP manager, which is the public facing interface contracts that allows anyone to interact with the MakerDAO system. In order to fund the vault that will be created, you need to first approve the MCD adapters for the respective ERC20 tokens that will be used to fund the vaults. These MCD adapters will be interacted with through the above mentioned CDP manager
 
 1. Call `CDP_MANAGER.open(bytes32 ilk, address usr)` to open an empty vault. This function will return `uint cdpId` which will be the id of the vault. 
-⋅⋅⋅ bytes32 ilk: Is the underlying asset that will be used within the vault.
-⋅⋅⋅ address usr: Is the address that will own the vault.
+⋅⋅* bytes32 ilk: Is the underlying asset that will be used within the vault.
+⋅⋅* address usr: Is the address that will own the vault.
 
 2. Call `CDP_MANAGER.urns(uint cdpId)` to need to retrieve the `urn` address.
-⋅⋅⋅ address urn: is where your collateral balance and outstanding stablecoin debt is registered.
+⋅⋅* address urn: is where your collateral balance and outstanding stablecoin debt is registered.
 
 3. Call `ERC20.approve(address MDC_JOIN_ASSET, uint dink)` to approve MDC_JOIN_ASSET's allowance to the amount you want to provide as collateral.
-⋅⋅⋅ address MDC_JOIN_ASSET: Is the adapter for the specific collateral token you're using.
-⋅⋅⋅ uint dink: The amount of collateral you want to lock up.
+⋅⋅* address MDC_JOIN_ASSET: Is the adapter for the specific collateral token you're using.
+⋅⋅* uint dink: The amount of collateral you want to lock up.
 
 4. Call 'MCD_JOIN_ERC20_A.join(address urn, uint dink)` to send `dink` amount of collateral to the urn.
 
 5. Call 'CDP_MANAGER.frob(uint cdpId, int dink, int dart)` to lock up `dink` collateral into your `urn` vault and create `dart` Dai.
-⋅⋅⋅ int dart: The value of Dai you want to borrow against your collateral.
+⋅⋅* int dart: The value of Dai you want to borrow against your collateral.
 
 6. Call `CDP_MANAGER.move(uint cdpId, address ETH_FROM, uint rad)` to move `rad` Dai from the `urn` to `ETH_FROM`.
-⋅⋅⋅ address ETH_FROM: Your personal address.
-⋅⋅⋅ uint rad: The amount of Dai you want to move from your `urn`. It is a 45 decimal high precision uint.
+⋅⋅* address ETH_FROM: Your personal address.
+⋅⋅* uint rad: The amount of Dai you want to move from your `urn`. It is a 45 decimal high precision uint.
 
 7. Call `MCD_VAT.hope(address MCD_JOIN_DAI)` to approve `MCD_JOIN_DAI` adapter in `MCD_VAT`.
-⋅⋅⋅ address MCD_JOIN_DAI: The adapter that manages the minting and burning of Dai.
+⋅⋅* address MCD_JOIN_DAI: The adapter that manages the minting and burning of Dai.
 
 8. Finally call `MCD_JOIN_DAI.exit(address ETH_FROM, uint dart)` to withdraw your Dai to your personal address.
 
