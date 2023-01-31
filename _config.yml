@@ -1,6 +1,6 @@
-remote_theme: pages-themes/minimal@v0.2.0
+remote_theme: pages-themes/midnight@v0.2.0
 plugins:
-- jekyll-remote-theme 
+- jekyll-remote-theme
 
 title: Patryk Loda
 description: Smart contract security engineer at Binance. Working towards becoming a full time auditor.
